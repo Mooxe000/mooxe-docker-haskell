@@ -52,11 +52,16 @@ RUN echo ' \
     >> ~/.bashrc
 
 # ============
+# Shelly
+# ============
+RUN bash -lc "cabal new-install --lib shelly"
+
+# ============
 # Yesod
 # - https://github.com/yesodweb/yesod
 # ============
-RUN stack install yesod-bin --install-ghc
-RUN bash -lc "cabal install yesod"
+# RUN stack install yesod-bin --install-ghc
+# RUN bash -lc "cabal install yesod"
 
 # ============
 # Miso
@@ -65,6 +70,15 @@ RUN bash -lc "cabal install yesod"
 
 # Fay
 # - https://github.com/faylang/fay
+
+# ============
+# Fix
+# ============
+RUN ln -s \
+    /lib/x86_64-linux-gnu/libtinfo.so.5.9 \
+    /lib/x86_64-linux-gnu/libtinfo.so
+
+RUN rm -rf dist
 
 # ============
 # Clean
