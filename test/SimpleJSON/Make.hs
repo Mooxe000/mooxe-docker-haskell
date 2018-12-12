@@ -7,6 +7,6 @@ main :: IO ()
 main = shelly $ do
 
   run_ "runghc" [
-      "-i../../"
+      "-i../../src"
     , "./Main.hs"
     ]
