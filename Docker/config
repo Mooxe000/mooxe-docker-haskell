@@ -9,18 +9,17 @@
 --
 -- This config file was generated using the following versions
 -- of Cabal and cabal-install:
--- Cabal library version: 2.4.1.0
--- cabal-install version: 2.4.1.0
+-- Cabal library version: 3.1.0.0
+-- cabal-install version: 3.1.0.0
+
+-- repository hackage.haskell.org
+  -- url: http://hackage.haskell.org/
 
 repository mirrors.tuna.tsinghua.edu.cn
   url: http://mirrors.tuna.tsinghua.edu.cn/hackage
-
--- repository hackage.haskell.org
---   url: http://hackage.haskell.org/
-
--- secure: True
--- root-keys:
--- key-threshold: 3
+  -- secure: True
+  -- root-keys:
+  -- key-threshold: 3
 
 -- default-user-config:
 -- require-sandbox: False
@@ -45,6 +44,7 @@ world-file: /root/.cabal/world
 -- shared:
 -- static:
 -- executable-dynamic: False
+-- executable-static: False
 -- profiling:
 -- executable-profiling:
 -- profiling-detail:
@@ -54,8 +54,8 @@ world-file: /root/.cabal/world
 -- library-for-ghci:
 -- split-sections: False
 -- split-objs: False
--- executable-stripping: True
--- library-stripping: True
+-- executable-stripping:
+-- library-stripping:
 -- configure-option:
 -- user-install: True
 -- package-db:
@@ -74,6 +74,7 @@ extra-prog-path: /root/.cabal/bin
 -- benchmarks: False
 -- relocatable: False
 -- response-files:
+-- allow-depending-on-private-libs:
 -- cabal-lib-version:
 -- constraint:
 -- preference:
@@ -84,20 +85,22 @@ extra-prog-path: /root/.cabal/bin
 -- documentation: False
 -- doc-index-file: $datadir/doc/$arch-$os-$compiler/index.html
 -- target-package-db:
--- max-backjumps: 2000
+-- max-backjumps: 4000
 -- reorder-goals: False
 -- count-conflicts: True
+-- minimize-conflict-set: False
 -- independent-goals: False
 -- shadow-installed-packages: False
 -- strong-flags: False
 -- allow-boot-library-installs: False
+-- reject-unconstrained-dependencies: none
 -- reinstall: False
 -- avoid-reinstalls: False
 -- force-reinstalls: False
 -- upgrade-dependencies: False
 -- index-state:
 -- root-cmd:
-symlink-bindir: /root/.cabal/bin
+-- symlink-bindir:
 build-summary: /root/.cabal/logs/build.log
 -- build-log:
 remote-build-reporting: anonymous
@@ -109,6 +112,11 @@ jobs: $ncpus
 -- keep-going: False
 -- offline: False
 -- project-file:
+-- lib: False
+-- package-env:
+-- overwrite-policy:
+-- install-method:
+installdir: /root/.cabal/bin
 -- username:
 -- password:
 -- password-command:
@@ -130,6 +138,16 @@ haddock
   -- quickjump: False
   -- hscolour-css:
   -- contents-location:
+
+init
+  -- interactive: True
+  -- cabal-version: 1.10
+  -- license: BSD3
+  -- tests:
+  -- test-dir:
+  -- language: Haskell2010
+  -- application-dir:
+  -- source-dir:
 
 install-dirs user
   -- prefix: /root/.cabal

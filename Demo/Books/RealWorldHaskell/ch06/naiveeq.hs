@@ -1,12 +1,17 @@
 -- file: ch06/naiveeq.hs
 import Data.Char (isSpace)
+
 data Color = Red | Green | Blue
 
 colorEq :: Color -> Color -> Bool
-colorEq Red   Red   = True
-colorEq Green Green = True
-colorEq Blue  Blue  = True
-colorEq _     _     = False
+colorEq Red Red =
+  True
+colorEq Green Green =
+  True
+colorEq Blue Blue =
+  True
+colorEq _ _ =
+  False
 
 stringEq :: [Char] -> [Char] -> Bool
 
@@ -14,7 +19,8 @@ stringEq :: [Char] -> [Char] -> Bool
 stringEq [] [] = True
 
 -- If both start with the same char, check the rest
-stringEq (x:xs) (y:ys) = x == y && stringEq xs ys
+stringEq (x:xs) (y:ys) =
+  x == y && stringEq xs ys
 
 -- Everything else doesn't match
 stringEq _ _ = False
@@ -25,9 +31,12 @@ stringEq _ _ = False
 --     show Blue  = "Blue"
 
 instance Show Color where
-    show Red   = "Color 1: Red"
-    show Green = "Color 2: Green"
-    show Blue  = "Color 3: Blue"
+  show Red =
+    "Color 1: Red"
+  show Green =
+    "Color 2: Green"
+  show Blue =
+    "Color 3: Blue"
 
 -- instance Read Color where
 --     -- readsPrec is the main function for parsing input
@@ -49,12 +58,16 @@ instance Show Color where
 --                   else tryParse xs
 
 instance Read Color where
-    readsPrec _ value = tryParse colors
-        where
-          cleanedUpValue = dropWhile isSpace value
-          tryParse [] = []
-          tryParse ((attempt, result):xs) =
-              if (take (length attempt) cleanedUpValue) == attempt
-              then [(result, drop (length attempt) cleanedUpValue)]
-              else tryParse xs
-          colors = [("Red", Red), ("Green", Green), ("Blue", Blue)]
+  readsPrec _ value = tryParse colors
+  where
+    cleanedUpValue = dropWhile isSpace value
+    tryParse [] = []
+    tryParse ((attempt, result):xs) =
+      if (take (length attempt) cleanedUpValue) == attempt
+      then [(result, drop (length attempt) cleanedUpValue)]
+      else tryParse xs
+    colors = [
+        ("Red", Red)
+      , ("Green", Green)
+      , ("Blue", Blue)
+      ]

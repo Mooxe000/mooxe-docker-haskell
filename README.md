@@ -4,6 +4,7 @@
 
 - Real World Haskell
   - http://cnhaskell.com/index.html
+  - http://book.realworldhaskell.org/read/
 - What I Wish I Knew When Learning Haskell
   - https://github.com/sdiehl/wiwinwlh
 - Write You a Haskell
