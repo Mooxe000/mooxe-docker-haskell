@@ -133,5 +133,11 @@ RUN \
   nix-instantiate --eval -E \
     'fetchGit { url = "https://github.com/NixOS/nixpkgs.git"; }'
 
+RUN \
+  mkdir -p ~/.local/bin && \
+  curl https://raw.githubusercontent.com/jmackie/nix-runghc/master/nix-runghc > \
+    ~/.local/bin/nix-runghc && \
+  chmod +x ~/.local/bin/nix-runghc
+
 ENV http_proxy ''
 ENV https_proxy ''
