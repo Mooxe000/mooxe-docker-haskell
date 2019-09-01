@@ -1,13 +1,15 @@
 #!/usr/bin/env runghc
 -- {-# LANGUAGE OverloadedStrings #-}
 
--- import Shelly
+import Shelly
+
 pps :: [ String ] -> String
 pps (x:xs) = x ++ pps xs
 pps [] = ""
 
--- main :: IO ()
+main :: IO ()
 main = do
+
   print $
     pps [
       "Hello"
@@ -15,3 +17,6 @@ main = do
     , "World"
     , "!!!"
     ]
+
+  -- shelly $ verbosely $ do
+  --   print $ run "uname" ["-n"]
