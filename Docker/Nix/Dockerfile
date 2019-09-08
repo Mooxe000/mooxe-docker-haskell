@@ -129,15 +129,30 @@ RUN \
     ~/.cabal/config && \
   cabal update && cabal new-update
 
-RUN \
-  nix-instantiate --eval -E \
-    'fetchGit { url = "https://github.com/NixOS/nixpkgs.git"; }'
+ADD ./Demo /root/Demo
 
 RUN \
   mkdir -p ~/.local/bin && \
   curl https://raw.githubusercontent.com/jmackie/nix-runghc/master/nix-runghc > \
     ~/.local/bin/nix-runghc && \
   chmod +x ~/.local/bin/nix-runghc
+
+RUN \
+  bash -lc "~/Demo/NixScript/withDeps/main.hs"
+
+RUN \
+  nix-instantiate --eval -E \
+    'fetchGit {\
+      url = "https://github.com/NixOS/nixpkgs.git";\
+      # ref = "release-19.03";\
+    }'
+
+RUN \
+  cd ~/Demo/MonoRepo && \
+  make run && \
+  cd
+  
+RUN rm -rf ~/Demo
 
 ENV http_proxy ''
 ENV https_proxy ''
