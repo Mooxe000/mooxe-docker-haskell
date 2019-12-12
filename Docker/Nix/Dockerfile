@@ -9,9 +9,6 @@ RUN nix-channel --update
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 
-ENV http_proxy http://192.168.31.128:8118
-ENV https_proxy http://192.168.31.128:8118
-
 RUN \
   nix-env -iA \
     nixpkgs.curl \
@@ -144,7 +141,7 @@ RUN \
   nix-instantiate --eval -E \
     'fetchGit {\
       url = "https://github.com/NixOS/nixpkgs.git";\
-      # ref = "release-19.03";\
+      # ref = "release-19.09";\
     }'
 
 RUN \
@@ -153,6 +150,3 @@ RUN \
   cd
   
 RUN rm -rf ~/Demo
-
-ENV http_proxy ''
-ENV https_proxy ''
