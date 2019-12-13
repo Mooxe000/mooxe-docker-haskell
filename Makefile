@@ -2,6 +2,10 @@ in:
 	docker run --rm -ti \
 		--name=haskell \
 		-p 3000:3000 \
+		-e http_proxy=$${http_proxy} \
+		-e HTTP_PROXY=$${http_proxy} \
+		-e https_proxy=$${https_proxy} \
+		-e HTTPS_PROXY=$${https_proxy} \
 		-v $$(pwd):/root/haskell \
 			mooxe/nix-haskell /usr/bin/env bash
 

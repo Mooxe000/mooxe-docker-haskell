@@ -4,8 +4,15 @@ MAINTAINER FooTearth "footearth@gmail.com"
 
 WORKDIR /root
 
-RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-RUN nix-channel --update
+RUN echo ${HTTP_PROXY}
+RUN echo ${HTTPS_PROXY}
+
+RUN \
+  nix-channel --remove nixpkgs && \
+  nix-channel --update
+RUN \
+  nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && \
+  nix-channel --update
 
 # RUN nix-build -A pythonFull '<nixpkgs>'
 
