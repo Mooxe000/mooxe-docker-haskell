@@ -22,4 +22,9 @@ publish:
 	docker push ${ImageName}
 
 docker:
-	docker run --rm -ti ${ImageName} /usr/bin/env bash
+	docker run --rm \
+		-e http_proxy=$${http_proxy} \
+		-e HTTP_PROXY=$${http_proxy} \
+		-e https_proxy=$${https_proxy} \
+		-e HTTPS_PROXY=$${https_proxy} \
+		-ti ${ImageName} /usr/bin/env bash

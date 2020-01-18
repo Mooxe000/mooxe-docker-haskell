@@ -1,3 +1,4 @@
+# FROM nixorg/nix:2
 FROM nixos/nix
 
 MAINTAINER FooTearth "footearth@gmail.com"
@@ -17,10 +18,16 @@ RUN \
 # RUN nix-build -A pythonFull '<nixpkgs>'
 
 RUN \
+  nix-env -i \
+    curl git gnumake
+
+RUN \
   nix-env -iA \
-    nixpkgs.curl \
-    nixpkgs.git \
-    nixpkgs.gnumake
+    nixpkgs.gnugrep \
+    nixpkgs.gnused \
+    nixpkgs.gawk \
+    nixpkgs.which \
+    nixpkgs.ncurses
 
 ########
 # SHELL
@@ -133,6 +140,13 @@ RUN \
     ~/.cabal/config && \
   cabal update && cabal new-update
 
+RUN \
+  nix-instantiate --eval -E \
+    'fetchGit {\
+      url = "https://github.com/NixOS/nixpkgs.git";\
+      # ref = "release-19.09";\
+    }'
+
 ADD ./Demo /root/Demo
 
 RUN \
@@ -143,13 +157,6 @@ RUN \
 
 RUN \
   bash -lc "~/Demo/NixScript/withDeps/main.hs"
-
-RUN \
-  nix-instantiate --eval -E \
-    'fetchGit {\
-      url = "https://github.com/NixOS/nixpkgs.git";\
-      # ref = "release-19.09";\
-    }'
 
 RUN \
   cd ~/Demo/MonoRepo && \
